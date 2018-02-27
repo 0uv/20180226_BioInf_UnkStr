@@ -1,0 +1,51 @@
+# 20180226 - Project Bioinformatics Unknown Structures - Script 1 version 1
+#
+# test - Python 3.6.4
+
+import re
+import pandas as pd
+
+fileName = r'C:\Users\tsurik\Desktop\BioInf\UP000005640_9606.fasta\UP000005640_9606.fasta'
+
+inputFile = open(fileName, 'r')
+
+keyValue = {}
+
+ID = []
+
+Seq = []
+
+rowCount = 0
+
+for line in inputFile:
+    #print(line)
+    if line[0] == '>' and rowCount == 0:
+        currentID = re.search(r'\|(.*)\|', line).group(1)
+        ID.append(currentID)
+        currentSeq = ''
+        rowCount += 1
+    elif line[0] == '>':
+        Seq.append(currentSeq)
+        keyValue[currentID] = currentSeq
+
+        currentID = re.search(r'\|(.*)\|', line).group(1)
+        ID.append(currentID)
+        currentSeq = ''
+        rowCount += 1
+    else:
+        currentSeq += line.strip()
+        rowCount += 1
+
+Seq.append(currentSeq)
+keyValue[currentID] = currentSeq
+inputFile.close()
+
+print(len(ID), len(Seq))
+print(ID[0], Seq[0])
+
+outputData = pd.DataFrame({'ID': ID, 'Seq': Seq})
+outputData.to_csv('outputData.csv')
+
+newFile = open('keyValue.txt', 'w')
+newFile.write(str(keyValue))
+newFile.close()

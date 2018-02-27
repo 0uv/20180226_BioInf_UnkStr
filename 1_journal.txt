@@ -1,0 +1,6 @@
+wget   -O 3_01_human_proteome_UP000005640_9606.gz   ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/reference_proteomes/Eukaryota/UP000005640_9606.fasta.gz
+z   x   3_01_human_proteome_UP000005640_9606.gz
+mv   UP000005640_9606.fasta   3_02_human_proteome_UP000005640_9606.fasta
+py   2_script_1_v_1   3_02_human_proteome_UP000005640_9606.fasta   >   3_03_out   2>&1
+py   2_script_1_v_2   3_02_human_proteome_UP000005640_9606.fasta   3_04_out_2   3_04_out_3   >   3_04_out_1   2>&1
+py   2_script_1_v_3   3_02_human_proteome_UP000005640_9606.fasta   3_05_table   >   3_05_log   2>&1

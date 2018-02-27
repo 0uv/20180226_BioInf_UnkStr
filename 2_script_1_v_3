@@ -1,0 +1,12 @@
+# 20180227 - Project Bioinformatics Unknown Structures - Script 1 version 3
+#
+# test - Python 3.6.4
+
+import sys,re
+f1=open(sys.argv[1],'r')
+f2=open(sys.argv[2],'w')
+for s1 in f1:
+ if s1[0]=='>':
+  if f2.tell()>0: f2.write('\n')
+  f2.write(re.search(r'\|(.+)\|',s1).group(1)+'\t')
+ else: f2.write(s1.strip())
