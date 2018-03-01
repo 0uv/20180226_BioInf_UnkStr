@@ -11,7 +11,7 @@ for s1 in f1:
  if s1[0]=='>' and 'mol:protein' in s1:
   s2=1
   if f2.tell()>0: f2.write('\n')
-  f2.write(re.search(r'>(.+)\smol', s1).group(1) + '\t')
+  f2.write(re.search(r'>(.+)\s+mol:protein', s1).group(1) + '\t')
  elif s1[0]=='>':
   s2=0
  else:
