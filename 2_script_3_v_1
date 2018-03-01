@@ -1,0 +1,12 @@
+# 20180227 - Project Bioinformatics Unknown Structures - Script 3 version 1
+#
+# test - Python 3.6.4
+
+import sys
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
+from Bio.Alphabet import IUPAC
+from Bio import SeqIO
+
+f1=open(sys.argv[1],'r')
+SeqIO.write([SeqRecord(Seq(s1.split()[1],IUPAC.extended_protein),id=s1.split()[0],description='') for s1 in f1],sys.argv[2],'fasta')
